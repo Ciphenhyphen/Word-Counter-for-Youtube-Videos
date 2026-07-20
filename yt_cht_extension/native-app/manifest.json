@@ -1,0 +1,7 @@
+{
+	"name": "YT_chart_ext",
+	"description": "Native application for yt-chart-ext",
+	"path": "C\\Users\\tankt\\Downloads\\Firefox\\yt_cht_extension\\yt-dl-ext_win.bat",
+	"type": "stdio",
+	"allowed_extensions": [ "yt-chart-ext@example.com" ]
+}
