@@ -13,7 +13,7 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
         var ID = url.replace(/^.*?(\?|&)(v=([^&]+)).*$/i,'$3'); 
         sendToNative(ID);
     }else{
-        console.log(error)
+        console.log("No link URL found")
     }
     
 });
@@ -29,7 +29,9 @@ function connect(){
 }
 
 function onNativeMessage(messageToSend){
-    console.log("Received" + messageToSend)
+    console.log("Received" + messageToSend);
+    const from_native = JSON.parse(messageToSend);
+    browser.storage.local.set({ wordCounts : from_native}); // This gets the message from the python file
 }
 
 function onDisconnected(p){
@@ -41,5 +43,5 @@ function onDisconnected(p){
 }
 
 function sendToNative(ID){
-    port.postMessage(ID);
+    port.postMessage(connect(ID));
 }

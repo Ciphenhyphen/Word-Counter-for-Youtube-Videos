@@ -46,8 +46,6 @@ def read_words(formatted_text):
     # Do it like the unigram project, undupe (set) and dupe (vec)
     # Modify the character, but save the word post mod
     # Python doesn't allow a specific character to be removed, a new string is needed
-    duplicate = []
-    non_duplicate = set()
     word_set = dict()
     for word in read_words:
         new_str = ""
@@ -55,13 +53,13 @@ def read_words(formatted_text):
             if word[i].isalnum() or word[i] == ' ':
                 new_str += word[i].lower()
 
-        if word in word_set:
-            word_set[word] += 1
+        if new_str in word_set:
+            word_set[new_str] += 1
         else:
-            word_set[word] = 1
+            word_set[new_str] = 1
 
         # Now to jsonify this.
-        return json.dumps(word_set)
+    return json.dumps(word_set)
         
 
 
@@ -69,5 +67,5 @@ def read_words(formatted_text):
 while True:
     msg = getMessage()
     # getMessage returns the vidID
-
-    sendMessage(encodeMessage(read_words()));
+    result_json = read_words(msg)
+    sendMessage(encodeMessage(result_json));
