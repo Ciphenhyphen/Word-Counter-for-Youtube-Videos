@@ -54,9 +54,14 @@ def read_words(formatted_text):
         for i in range(len(word)):
             if word[i].isalnum() or word[i] == ' ':
                 new_str += word[i].lower()
-        duplicate.append(new_str)
-        non_duplicate.add(new_str)
 
+        if word in word_set:
+            word_set[word] += 1
+        else:
+            word_set[word] = 1
+
+        # Now to jsonify this.
+        return json.dumps(word_set)
         
 
 
@@ -64,4 +69,5 @@ def read_words(formatted_text):
 while True:
     msg = getMessage()
     # getMessage returns the vidID
-    
+
+    sendMessage(encodeMessage(read_words()));
